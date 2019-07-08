@@ -1,0 +1,18 @@
+{
+  "name": "big-atomic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Finn <rafadsm20@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "sourcequery": "0.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}
