@@ -44,7 +44,12 @@ client.on('ready', () => {
     sq.open(RUST_IP, RUST_PORT);
 
     sq.getInfo(function(err, info){
-            client.user.setActivity(`${info.players} ${OnlineStr}`, {type: 'WATCHING'});
+        if (err)
+        {
+            client.user.setActivity(OfflineStr, { type: 'PLAYING' });
+        }
+        else
+			client.user.setActivity(`${info.players} ${OnlineStr}`, {type: 'WATCHING'});
             sq.close();
         });
         
@@ -184,8 +189,13 @@ var interv = setInterval(()=>{
     try{
         sq.open(RUST_IP, RUST_PORT);
         sq.getInfo(function(err, info){
-            client.user.setActivity(`${info.players} ${OnlineStr}`, {type: 'WATCHING'});
-            client.user.setPresence()
+            
+            if (err) {
+                client.user.setActivity(OfflineStr, { type: 'PLAYING' });
+            }
+            else
+				client.user.setActivity(`${info.players} ${OnlineStr}`, {type: 'WATCHING'});
+            //client.user.setPresence()
             sq.close();
         });
         
