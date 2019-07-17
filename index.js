@@ -9,16 +9,9 @@ const OnlineStr = "Players Online";
 const OfflineStr = "Offline";
 
 
-
 const client = new Discord.Client();
 var sq = new SourceQuery(1500);
 
-const TermosMessage = "```Você concorda com os termos? Responda reagindo abaixo para ter acesso ao discord.```";
-
-function GetMyGuild()
-{
-    return client.guilds.find(guild => guild.id == 388044994210168832);
-}
 const prefix = '!';
 
 client.on('ready', () => {
@@ -28,18 +21,7 @@ client.on('ready', () => {
 
     client.user.setStatus('dnd');
 
-    const cntwo = client.channels.find(cn => cn.id == 514455704686428161);
-
-    cntwo.fetchMessages({limit: 100}).then(messages => messages.forEach(x => {
-        if(x.content == TermosMessage)
-        x.delete();
-    }));
-
-    cntwo.send(TermosMessage).then(msg =>{
-        msg.react('👍');
-        setTimeout(() => msg.react('👎'), 500);
-    });
-
+ 
   try{
     sq.open(RUST_IP, RUST_PORT);
 
@@ -126,17 +108,6 @@ client.on('message', message => {
         }
         break;
 
-        case 'termos':
-        {
-            if(!isAdmin)
-            return;
-            channel.send(TermosMessage).then(msg =>{
-                msg.react('👍');
-                msg.react('👎');
-            })
-        }
-        break;
-
         case 'prune':
         {
             if(!isAdmin)
@@ -149,39 +120,6 @@ client.on('message', message => {
 });
 
 
-
-client.on("guildMemberAdd", (member) => {
-    const cntwo = client.channels.find(cn => cn.id == 514534673712676865);
-    cntwo.send(member.user + " Seja bem vindo, para ter acesso ao discord, vá até #termos-discord e aceite os termos!");
-});
-
-
-client.on('messageReactionAdd', (reaction, user) => {
-
-    if(user.bot)
-        return;
-        
-    if(reaction.message.content == TermosMessage) {
-
-        const member = GetMyGuild().members.find(m => m.id == user.id)
-
-        if(member.hasPermission("ADMINISTRATOR"))
-            return;
-        
-        if(reaction.emoji.name == '👍')
-        {
-            let role = GetMyGuild().roles.find(r => r.name === "Membro");
-            member.addRole(role);
-
-            user.send("Agora você faz parte de nosso discord!\nTome cuidado para não ser expulso.");
-        }
-        if(reaction.emoji.name == '👎')
-        {
-            user.send("Você não concordou com os termos, sinto muito, você não é bem-vindo aqui!");
-            setTimeout(() => member.kick(), 500);
-        }
-    }
-});
 
 client.login(BOT_TOKEN);
 
