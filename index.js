@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const SourceQuery = require('sourcequery');
+const WS = require('./ws/ws')
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const RUST_IP = process.env.RUST_IP;
@@ -12,6 +13,9 @@ const OfflineStr = "Offline";
 
 const client = new Discord.Client();
 var sq = new SourceQuery(1500);
+var ws = new WS(BOT_TOKEN, 8080, client)
+
+console.log(BOT_TOKEN)
 
 const TermosMessage = "```Você concorda com os termos? Responda reagindo abaixo para ter acesso ao discord.```";
 
@@ -218,7 +222,3 @@ function ShutdownBotServer()
 [`exit`, 'SIGINT', `SIGUSR1`, `SIGUSR2`, `uncaughtException`, `SIGTERM`].forEach((eventType) => {
     process.on(eventType, ShutdownBotServer);
 });
-
-
-
-
