@@ -12,12 +12,6 @@ const OfflineStr = "Offline";
 
 const client = new Discord.Client();
 var sq = new SourceQuery(1500);
-<<<<<<< HEAD
-var ws = new WS(BOT_TOKEN, 80, client)
-
-console.log(BOT_TOKEN)
-=======
->>>>>>> parent of 4453832... test server
 
 const TermosMessage = "```Você concorda com os termos? Responda reagindo abaixo para ter acesso ao discord.```";
 
