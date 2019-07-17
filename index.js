@@ -13,7 +13,7 @@ const OfflineStr = "Offline";
 
 const client = new Discord.Client();
 var sq = new SourceQuery(1500);
-var ws = new WS(BOT_TOKEN, 80, client)
+var ws = new WS(BOT_TOKEN, 8080, client)
 
 console.log(BOT_TOKEN)
 
