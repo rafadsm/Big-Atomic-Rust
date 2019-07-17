@@ -108,12 +108,25 @@ client.on('message', message => {
         }
         break;
 
-        case 'prune':
+        case 'limpar':
         {
             if(!isAdmin)
                 return;
 
             channel.fetchMessages({limit: 100}).then(messages => channel.bulkDelete(messages));
+        }
+        break;
+
+        case 'votar':
+        {
+            if (!isAdmin)
+                return;
+
+            message.delete();
+            channel.send(args.join(' ')).then(function (msg) {
+                msg.react("👍");
+                msg.react('👎');
+            });
         }
         break;
     }
